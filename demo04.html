@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<script src="libs/aframe.min.js"></script>
+<!-- marker + location based ARjs without NFT support -->
+<script src="libs/aframe-ar.js"></script>
+
+<body style="margin : 0px; overflow: hidden;">
+  <a-scene embedded arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960;'>
+    <a-marker preset='hiro' smooth='true'>
+      <a-entity id="a-entity" rotation="0 90 0" position="0 0 0" scale="0.05 0.05 0.05"
+        gltf-model="libs/demo4/scene.gltf">
+      </a-entity>
+      <!-- rotation="pitch yaw roll"
+          roll, pitch, yaw
+          - pitch: vertical rollercoaster up/down, nose & tail (nose dive: 90°).
+          - yaw: steering, like a bike (opposite direction: -90°).          
+          - roll: horizontal tilting, like plane wings (try: 45°).
+            - from: https://en.wikipedia.org/wiki/Gimbal_lock
+        -->
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+
+</html>

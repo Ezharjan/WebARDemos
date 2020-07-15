@@ -82,7 +82,7 @@
             this.dispatchEvent({
                 name: "getMarker",
                 target: this,
-                data: {index: i, type: markerType, marker: markerInfo, matrix: this.transform_mat}
+                data: { index: i, type: markerType, marker: markerInfo, matrix: this.transform_mat }
             })
         }
         var multiMarkerCount = this.getMultiMarkerCount();
@@ -98,7 +98,7 @@
                     this.dispatchEvent({
                         name: "getMultiMarker",
                         target: this,
-                        data: {multiMarkerId: i, matrix: this.transform_mat}
+                        data: { multiMarkerId: i, matrix: this.transform_mat }
                     });
                     break
                 }
@@ -372,7 +372,7 @@
             if (self.onload) {
                 self.onload()
             }
-            self.dispatchEvent({name: "load", target: self})
+            self.dispatchEvent({ name: "load", target: self })
         }), 1)
     });
     ARController.prototype._copyImageToHeap = (function (image) {
@@ -487,7 +487,7 @@
         }
         mediaDevicesConstraints.facingMode = facing;
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-        var hdConstraints = {audio: false, video: {mandatory: constraints}};
+        var hdConstraints = { audio: false, video: { mandatory: constraints } };
         if (false) {
             if (navigator.mediaDevices) {
                 navigator.mediaDevices.getUserMedia({
@@ -718,7 +718,7 @@
     }
 
     function writeByteArrayToFS(target, byteArray, callback) {
-        FS.writeFile(target, byteArray, {encoding: "binary"});
+        FS.writeFile(target, byteArray, { encoding: "binary" });
         callback(byteArray)
     }
 
@@ -1106,7 +1106,7 @@ var cwrap, ccall;
             return ret
         })
     };
-    var toC = {"string": JSfuncs["stringToC"], "array": JSfuncs["arrayToC"]};
+    var toC = { "string": JSfuncs["stringToC"], "array": JSfuncs["arrayToC"] };
     ccall = function ccallFunc(ident, returnType, argTypes, args, opts) {
         var func = getCFunc(ident);
         var cArgs = [];
@@ -1139,7 +1139,7 @@ var cwrap, ccall;
 
     function parseJSFunc(jsfunc) {
         var parsed = jsfunc.toString().match(sourceRegex).slice(1);
-        return {arguments: parsed[0], body: parsed[1], returnValue: parsed[2]}
+        return { arguments: parsed[0], body: parsed[1], returnValue: parsed[2] }
     }
 
     var JSsource = {};
@@ -2244,7 +2244,7 @@ function copyTempDouble(ptr) {
 }
 
 function _atexit(func, arg) {
-    __ATEXIT__.unshift({func: func, arg: arg})
+    __ATEXIT__.unshift({ func: func, arg: arg })
 }
 
 function ___cxa_atexit() {
@@ -2490,7 +2490,7 @@ function ___cxa_find_matching_catch() {
 }
 
 function ___cxa_throw(ptr, type, destructor) {
-    EXCEPTIONS.infos[ptr] = {ptr: ptr, adjusted: ptr, type: type, destructor: destructor, refcount: 0};
+    EXCEPTIONS.infos[ptr] = { ptr: ptr, adjusted: ptr, type: type, destructor: destructor, refcount: 0 };
     EXCEPTIONS.last = ptr;
     if (!("uncaught_exception" in __ZSt18uncaught_exceptionv)) {
         __ZSt18uncaught_exceptionv.uncaught_exception = 1
@@ -2755,7 +2755,7 @@ function __embind_register_integer(primitiveType, name, size, minRange, maxRange
 }
 
 var emval_free_list = [];
-var emval_handle_array = [{}, {value: undefined}, {value: null}, {value: true}, {value: false}];
+var emval_handle_array = [{}, { value: undefined }, { value: null }, { value: true }, { value: false }];
 
 function __emval_decref(handle) {
     if (handle > 4 && 0 === --emval_handle_array[handle].refcount) {
@@ -2808,7 +2808,7 @@ function __emval_register(value) {
             ;
         default: {
             var handle = emval_free_list.length ? emval_free_list.pop() : emval_handle_array.length;
-            emval_handle_array[handle] = {refcount: 1, value: value};
+            emval_handle_array[handle] = { refcount: 1, value: value };
             return handle
         }
     }
@@ -3661,7 +3661,7 @@ var TTY = {
     shutdown: (function () {
     }),
     register: (function (dev, ops) {
-        TTY.ttys[dev] = {input: [], output: [], ops: ops};
+        TTY.ttys[dev] = { input: [], output: [], ops: ops };
         FS.registerDevice(dev, TTY.stream_ops)
     }),
     stream_ops: {
@@ -3816,10 +3816,10 @@ var MEMFS = {
                         rmdir: MEMFS.node_ops.rmdir,
                         readdir: MEMFS.node_ops.readdir,
                         symlink: MEMFS.node_ops.symlink
-                    }, stream: {llseek: MEMFS.stream_ops.llseek}
+                    }, stream: { llseek: MEMFS.stream_ops.llseek }
                 },
                 file: {
-                    node: {getattr: MEMFS.node_ops.getattr, setattr: MEMFS.node_ops.setattr},
+                    node: { getattr: MEMFS.node_ops.getattr, setattr: MEMFS.node_ops.setattr },
                     stream: {
                         llseek: MEMFS.stream_ops.llseek,
                         read: MEMFS.stream_ops.read,
@@ -3837,7 +3837,7 @@ var MEMFS = {
                     }, stream: {}
                 },
                 chrdev: {
-                    node: {getattr: MEMFS.node_ops.getattr, setattr: MEMFS.node_ops.setattr},
+                    node: { getattr: MEMFS.node_ops.getattr, setattr: MEMFS.node_ops.setattr },
                     stream: FS.chrdev_stream_ops
                 }
             }
@@ -4096,7 +4096,7 @@ var MEMFS = {
                 }
                 buffer.set(contents, ptr)
             }
-            return {ptr: ptr, allocated: allocated}
+            return { ptr: ptr, allocated: allocated }
         }),
         msync: (function (stream, buffer, offset, length, mmapFlags) {
             if (!FS.isFile(stream.node.mode)) {
@@ -4156,7 +4156,7 @@ var IDBFS = {
                 fileStore = db.createObjectStore(IDBFS.DB_STORE_NAME)
             }
             if (!fileStore.indexNames.contains("timestamp")) {
-                fileStore.createIndex("timestamp", "timestamp", {unique: false})
+                fileStore.createIndex("timestamp", "timestamp", { unique: false })
             }
         });
         req.onsuccess = (function () {
@@ -4194,9 +4194,9 @@ var IDBFS = {
             if (FS.isDir(stat.mode)) {
                 check.push.apply(check, FS.readdir(path).filter(isRealDir).map(toAbsolute(path)))
             }
-            entries[path] = {timestamp: stat.mtime}
+            entries[path] = { timestamp: stat.mtime }
         }
-        return callback(null, {type: "local", entries: entries})
+        return callback(null, { type: "local", entries: entries })
     }),
     getRemoteSet: (function (mount, callback) {
         var entries = {};
@@ -4212,9 +4212,9 @@ var IDBFS = {
             index.openKeyCursor().onsuccess = (function (event) {
                 var cursor = event.target.result;
                 if (!cursor) {
-                    return callback(null, {type: "remote", db: db, entries: entries})
+                    return callback(null, { type: "remote", db: db, entries: entries })
                 }
-                entries[cursor.primaryKey] = {timestamp: cursor.key};
+                entries[cursor.primaryKey] = { timestamp: cursor.key };
                 cursor.continue()
             })
         }))
@@ -4229,10 +4229,10 @@ var IDBFS = {
             return callback(e)
         }
         if (FS.isDir(stat.mode)) {
-            return callback(null, {timestamp: stat.mtime, mode: stat.mode})
+            return callback(null, { timestamp: stat.mtime, mode: stat.mode })
         } else if (FS.isFile(stat.mode)) {
             node.contents = MEMFS.getFileDataAsTypedArray(node);
-            return callback(null, {timestamp: stat.mtime, mode: stat.mode, contents: node.contents})
+            return callback(null, { timestamp: stat.mtime, mode: stat.mode, contents: node.contents })
         } else {
             return callback(new Error("node type not supported"))
         }
@@ -4242,7 +4242,7 @@ var IDBFS = {
             if (FS.isDir(entry.mode)) {
                 FS.mkdir(path, entry.mode)
             } else if (FS.isFile(entry.mode)) {
-                FS.writeFile(path, entry.contents, {encoding: "binary", canOwn: true})
+                FS.writeFile(path, entry.contents, { encoding: "binary", canOwn: true })
             } else {
                 return callback(new Error("node type not supported"))
             }
@@ -4503,7 +4503,7 @@ var NODEFS = {
                 if (FS.isDir(node.mode)) {
                     fs.mkdirSync(path, node.mode)
                 } else {
-                    fs.writeFileSync(path, "", {mode: node.mode})
+                    fs.writeFileSync(path, "", { mode: node.mode })
                 }
             } catch (e) {
                 if (!e.code) throw e;
@@ -4782,7 +4782,7 @@ var FS = {
     initialized: false,
     ignorePermissions: true,
     trackingDelegate: {},
-    tracking: {openFlags: {READ: 1, WRITE: 2}},
+    tracking: { openFlags: { READ: 1, WRITE: 2 } },
     ErrnoError: null,
     genericErrors: {},
     filesystems: null,
@@ -4793,8 +4793,8 @@ var FS = {
     lookupPath: (function (path, opts) {
         path = PATH.resolve(FS.cwd(), path);
         opts = opts || {};
-        if (!path) return {path: "", node: null};
-        var defaults = {follow_mount: true, recurse_count: 0};
+        if (!path) return { path: "", node: null };
+        var defaults = { follow_mount: true, recurse_count: 0 };
         for (var key in defaults) {
             if (opts[key] === undefined) {
                 opts[key] = defaults[key]
@@ -4825,7 +4825,7 @@ var FS = {
                 while (FS.isLink(current.mode)) {
                     var link = FS.readlink(current_path);
                     current_path = PATH.resolve(PATH.dirname(current_path), link);
-                    var lookup = FS.lookupPath(current_path, {recurse_count: opts.recurse_count});
+                    var lookup = FS.lookupPath(current_path, { recurse_count: opts.recurse_count });
                     current = lookup.node;
                     if (count++ > 40) {
                         throw new FS.ErrnoError(ERRNO_CODES.ELOOP)
@@ -4833,7 +4833,7 @@ var FS = {
                 }
             }
         }
-        return {path: current_path, node: current}
+        return { path: current_path, node: current }
     }),
     getPath: (function (node) {
         var path;
@@ -5137,7 +5137,7 @@ var FS = {
         return ma << 8 | mi
     }),
     registerDevice: (function (dev, ops) {
-        FS.devices[dev] = {stream_ops: ops}
+        FS.devices[dev] = { stream_ops: ops }
     }),
     getDevice: (function (dev) {
         return FS.devices[dev]
@@ -5187,7 +5187,7 @@ var FS = {
         if (root && FS.root) {
             throw new FS.ErrnoError(ERRNO_CODES.EBUSY)
         } else if (!root && !pseudo) {
-            var lookup = FS.lookupPath(mountpoint, {follow_mount: false});
+            var lookup = FS.lookupPath(mountpoint, { follow_mount: false });
             mountpoint = lookup.path;
             node = lookup.node;
             if (FS.isMountpoint(node)) {
@@ -5197,7 +5197,7 @@ var FS = {
                 throw new FS.ErrnoError(ERRNO_CODES.ENOTDIR)
             }
         }
-        var mount = {type: type, opts: opts, mountpoint: mountpoint, mounts: []};
+        var mount = { type: type, opts: opts, mountpoint: mountpoint, mounts: [] };
         var mountRoot = type.mount(mount);
         mountRoot.mount = mount;
         mount.root = mountRoot;
@@ -5212,7 +5212,7 @@ var FS = {
         return mountRoot
     }),
     unmount: (function (mountpoint) {
-        var lookup = FS.lookupPath(mountpoint, {follow_mount: false});
+        var lookup = FS.lookupPath(mountpoint, { follow_mount: false });
         if (!FS.isMountpoint(lookup.node)) {
             throw new FS.ErrnoError(ERRNO_CODES.EINVAL)
         }
@@ -5238,7 +5238,7 @@ var FS = {
         return parent.node_ops.lookup(parent, name)
     }),
     mknod: (function (path, mode, dev) {
-        var lookup = FS.lookupPath(path, {parent: true});
+        var lookup = FS.lookupPath(path, { parent: true });
         var parent = lookup.node;
         var name = PATH.basename(path);
         if (!name || name === "." || name === "..") {
@@ -5277,7 +5277,7 @@ var FS = {
         if (!PATH.resolve(oldpath)) {
             throw new FS.ErrnoError(ERRNO_CODES.ENOENT)
         }
-        var lookup = FS.lookupPath(newpath, {parent: true});
+        var lookup = FS.lookupPath(newpath, { parent: true });
         var parent = lookup.node;
         if (!parent) {
             throw new FS.ErrnoError(ERRNO_CODES.ENOENT)
@@ -5299,9 +5299,9 @@ var FS = {
         var new_name = PATH.basename(new_path);
         var lookup, old_dir, new_dir;
         try {
-            lookup = FS.lookupPath(old_path, {parent: true});
+            lookup = FS.lookupPath(old_path, { parent: true });
             old_dir = lookup.node;
-            lookup = FS.lookupPath(new_path, {parent: true});
+            lookup = FS.lookupPath(new_path, { parent: true });
             new_dir = lookup.node
         } catch (e) {
             throw new FS.ErrnoError(ERRNO_CODES.EBUSY)
@@ -5370,7 +5370,7 @@ var FS = {
         }
     }),
     rmdir: (function (path) {
-        var lookup = FS.lookupPath(path, {parent: true});
+        var lookup = FS.lookupPath(path, { parent: true });
         var parent = lookup.node;
         var name = PATH.basename(path);
         var node = FS.lookupNode(parent, name);
@@ -5400,7 +5400,7 @@ var FS = {
         }
     }),
     readdir: (function (path) {
-        var lookup = FS.lookupPath(path, {follow: true});
+        var lookup = FS.lookupPath(path, { follow: true });
         var node = lookup.node;
         if (!node.node_ops.readdir) {
             throw new FS.ErrnoError(ERRNO_CODES.ENOTDIR)
@@ -5408,7 +5408,7 @@ var FS = {
         return node.node_ops.readdir(node)
     }),
     unlink: (function (path) {
-        var lookup = FS.lookupPath(path, {parent: true});
+        var lookup = FS.lookupPath(path, { parent: true });
         var parent = lookup.node;
         var name = PATH.basename(path);
         var node = FS.lookupNode(parent, name);
@@ -5450,7 +5450,7 @@ var FS = {
         return PATH.resolve(FS.getPath(link.parent), link.node_ops.readlink(link))
     }),
     stat: (function (path, dontFollow) {
-        var lookup = FS.lookupPath(path, {follow: !dontFollow});
+        var lookup = FS.lookupPath(path, { follow: !dontFollow });
         var node = lookup.node;
         if (!node) {
             throw new FS.ErrnoError(ERRNO_CODES.ENOENT)
@@ -5466,7 +5466,7 @@ var FS = {
     chmod: (function (path, mode, dontFollow) {
         var node;
         if (typeof path === "string") {
-            var lookup = FS.lookupPath(path, {follow: !dontFollow});
+            var lookup = FS.lookupPath(path, { follow: !dontFollow });
             node = lookup.node
         } else {
             node = path
@@ -5474,7 +5474,7 @@ var FS = {
         if (!node.node_ops.setattr) {
             throw new FS.ErrnoError(ERRNO_CODES.EPERM)
         }
-        node.node_ops.setattr(node, {mode: mode & 4095 | node.mode & ~4095, timestamp: Date.now()})
+        node.node_ops.setattr(node, { mode: mode & 4095 | node.mode & ~4095, timestamp: Date.now() })
     }),
     lchmod: (function (path, mode) {
         FS.chmod(path, mode, true)
@@ -5489,7 +5489,7 @@ var FS = {
     chown: (function (path, uid, gid, dontFollow) {
         var node;
         if (typeof path === "string") {
-            var lookup = FS.lookupPath(path, {follow: !dontFollow});
+            var lookup = FS.lookupPath(path, { follow: !dontFollow });
             node = lookup.node
         } else {
             node = path
@@ -5497,7 +5497,7 @@ var FS = {
         if (!node.node_ops.setattr) {
             throw new FS.ErrnoError(ERRNO_CODES.EPERM)
         }
-        node.node_ops.setattr(node, {timestamp: Date.now()})
+        node.node_ops.setattr(node, { timestamp: Date.now() })
     }),
     lchown: (function (path, uid, gid) {
         FS.chown(path, uid, gid, true)
@@ -5515,7 +5515,7 @@ var FS = {
         }
         var node;
         if (typeof path === "string") {
-            var lookup = FS.lookupPath(path, {follow: true});
+            var lookup = FS.lookupPath(path, { follow: true });
             node = lookup.node
         } else {
             node = path
@@ -5533,7 +5533,7 @@ var FS = {
         if (err) {
             throw new FS.ErrnoError(err)
         }
-        node.node_ops.setattr(node, {size: len, timestamp: Date.now()})
+        node.node_ops.setattr(node, { size: len, timestamp: Date.now() })
     }),
     ftruncate: (function (fd, len) {
         var stream = FS.getStream(fd);
@@ -5546,9 +5546,9 @@ var FS = {
         FS.truncate(stream.node, len)
     }),
     utime: (function (path, atime, mtime) {
-        var lookup = FS.lookupPath(path, {follow: true});
+        var lookup = FS.lookupPath(path, { follow: true });
         var node = lookup.node;
-        node.node_ops.setattr(node, {timestamp: Math.max(atime, mtime)})
+        node.node_ops.setattr(node, { timestamp: Math.max(atime, mtime) })
     }),
     open: (function (path, flags, mode, fd_start, fd_end) {
         if (path === "") {
@@ -5567,7 +5567,7 @@ var FS = {
         } else {
             path = PATH.normalize(path);
             try {
-                var lookup = FS.lookupPath(path, {follow: !(flags & 131072)});
+                var lookup = FS.lookupPath(path, { follow: !(flags & 131072) });
                 node = lookup.node
             } catch (e) {
             }
@@ -5795,7 +5795,7 @@ var FS = {
         return FS.currentPath
     }),
     chdir: (function (path) {
-        var lookup = FS.lookupPath(path, {follow: true});
+        var lookup = FS.lookupPath(path, { follow: true });
         if (!FS.isDir(lookup.node.mode)) {
             throw new FS.ErrnoError(ERRNO_CODES.ENOTDIR)
         }
@@ -5858,7 +5858,7 @@ var FS = {
                         var stream = FS.getStream(fd);
                         if (!stream) throw new FS.ErrnoError(ERRNO_CODES.EBADF);
                         var ret = {
-                            parent: null, mount: {mountpoint: "fake"}, node_ops: {
+                            parent: null, mount: { mountpoint: "fake" }, node_ops: {
                                 readlink: (function () {
                                     return stream.path
                                 })
@@ -5925,7 +5925,7 @@ var FS = {
         FS.createDefaultDirectories();
         FS.createDefaultDevices();
         FS.createSpecialDirectories();
-        FS.filesystems = {"MEMFS": MEMFS, "IDBFS": IDBFS, "NODEFS": NODEFS, "WORKERFS": WORKERFS}
+        FS.filesystems = { "MEMFS": MEMFS, "IDBFS": IDBFS, "NODEFS": NODEFS, "WORKERFS": WORKERFS }
     }),
     init: (function (input, output, error) {
         assert(!FS.init.initialized, "FS.init was previously called. If you want to initialize later with custom parameters, remove any earlier calls (note that one is automatically added to the generated code)");
@@ -5976,7 +5976,7 @@ var FS = {
     }),
     analyzePath: (function (path, dontResolveLastLink) {
         try {
-            var lookup = FS.lookupPath(path, {follow: !dontResolveLastLink});
+            var lookup = FS.lookupPath(path, { follow: !dontResolveLastLink });
             path = lookup.path
         } catch (e) {
         }
@@ -5992,12 +5992,12 @@ var FS = {
             parentObject: null
         };
         try {
-            var lookup = FS.lookupPath(path, {parent: true});
+            var lookup = FS.lookupPath(path, { parent: true });
             ret.parentExists = true;
             ret.parentPath = lookup.path;
             ret.parentObject = lookup.node;
             ret.name = PATH.basename(path);
-            lookup = FS.lookupPath(path, {follow: !dontResolveLastLink});
+            lookup = FS.lookupPath(path, { follow: !dontResolveLastLink });
             ret.exists = true;
             ret.path = lookup.path;
             ret.object = lookup.node;
@@ -6203,9 +6203,9 @@ var FS = {
                     return this._chunkSize
                 })
             });
-            var properties = {isDevice: false, contents: lazyArray}
+            var properties = { isDevice: false, contents: lazyArray }
         } else {
-            var properties = {isDevice: false, url: url}
+            var properties = { isDevice: false, url: url }
         }
         var node = FS.createFile(parent, name, properties, canRead, canWrite);
         if (properties.contents) {
@@ -6476,7 +6476,7 @@ var SYSCALLS = {
             return -ERRNO_CODES.EINVAL
         }
         var node;
-        var lookup = FS.lookupPath(path, {follow: true});
+        var lookup = FS.lookupPath(path, { follow: true });
         node = lookup.node;
         var perms = "";
         if (amode & 4) perms += "r";
@@ -6674,7 +6674,7 @@ function __embind_register_memory_view(rawType, dataTypeIndex, name) {
         "fromWireType": decodeMemoryView,
         "argPackAdvance": 8,
         "readValueFromPointer": decodeMemoryView
-    }, {ignoreDuplicateRegistrations: true})
+    }, { ignoreDuplicateRegistrations: true })
 }
 
 function _time(ptr) {
@@ -54282,7 +54282,7 @@ var asm = (function (global, env, buffer) {
                     w = d + 12 + (B << 2) | 0;
                     y = c[w >> 2] | 0;
                     b: do
-                        if (((((!((y | 0) < (g | 0) | (y | 0) > (f | 0)) ? (E = d + 131084 + (B << 4) | 0, (c[E >> 2] | 0) != 1) : 0) ? (c[d + 131084 + (B << 4) + 4 >> 2] | 0) != (D | 0) : 0) ? (c[d + 131084 + (B << 4) + 8 >> 2] | 0) != 1 : 0) ? (c[d + 131084 + (B << 4) + 12 >> 2] | 0) != (z | 0) : 0) ? (ge(c[d >> 2] | 0, a, 0, A, B + 1 | 0, E, k + ((c[l >> 2] | 0) * 80048 | 0) | 0) | 0) >= 0 : 0) {
+                        if (((((!((y | 0)<(g | 0) | (y | 0)>(f | 0)) ? (E = d + 131084 + (B << 4) | 0, (c[E >> 2] | 0) != 1) : 0) ? (c[d + 131084 + (B << 4) + 4 >> 2] | 0) != (D | 0) : 0) ? (c[d + 131084 + (B << 4) + 8 >> 2] | 0) != 1 : 0) ? (c[d + 131084 + (B << 4) + 12 >> 2] | 0) != (z | 0) : 0) ? (ge(c[d >> 2] | 0, a, 0, A, B + 1 | 0, E, k + ((c[l >> 2] | 0) * 80048 | 0) | 0) | 0) >= 0 : 0) {
                             t = c[w >> 2] | 0;
                             x = c[l >> 2] | 0;
                             u = k + (x * 80048 | 0) + 28 | 0;
@@ -59109,7 +59109,7 @@ run();
      a camera parameter file URL, and the onSuccess attribute set to a callback function.
 
      ARController.getUserMediaARController({
-    			cameraParam: 'Data/camera_para.dat',
+    			cameraParam: '',
     			onSuccess: function(arController, arCameraParam) {
     				console.log("Got ARController", arController);
     				console.log("Got ARCameraParam", arCameraParam);
@@ -59188,7 +59188,7 @@ run();
      ARCameraParam is used for loading AR camera parameters for use with ARController.
      Use by passing in an URL and a callback function.
 
-     var camera = new ARCameraParam('Data/camera_para.dat', function() {
+     var camera = new ARCameraParam('', function() {
     			console.log('loaded camera', this.id);
     		},
      function(err) {
@@ -59453,7 +59453,7 @@ run();
     }
 
     function writeByteArrayToFS(target, byteArray, callback) {
-        FS.writeFile(target, byteArray, {encoding: 'binary'});
+        FS.writeFile(target, byteArray, { encoding: 'binary' });
         // console.log('FS written', target);
 
         callback(byteArray);
@@ -60007,7 +60007,7 @@ ARjs.MarkerControls.prototype.updateWithModelViewMatrix = function (modelViewMat
     markerObject3D.matrix.decompose(markerObject3D.position, markerObject3D.quaternion, markerObject3D.scale)
 
     // dispatchEvent
-    this.dispatchEvent({type: 'markerFound'});
+    this.dispatchEvent({ type: 'markerFound' });
 
     return renderReqd;
 }
@@ -60289,11 +60289,11 @@ THREEx.ArSmoothedControls.prototype.update = function (targetObject3d) {
     //////////////////////////////////////////////////////////////////////////////
     // honor becameVisible event
     if (wasVisible === false && object3d.visible === true) {
-        this.dispatchEvent({type: 'becameVisible'})
+        this.dispatchEvent({ type: 'becameVisible' })
     }
     // honor becameUnVisible event
     if (wasVisible === true && object3d.visible === false) {
-        this.dispatchEvent({type: 'becameUnVisible'})
+        this.dispatchEvent({ type: 'becameUnVisible' })
     }
     return
 
@@ -60666,12 +60666,12 @@ ARjs.Profile = THREEx.ArToolkitProfile = function () {
 
 ARjs.Profile.prototype._guessPerformanceLabel = function () {
     var isMobile = navigator.userAgent.match(/Android/i) ||
-    navigator.userAgent.match(/webOS/i) ||
-    navigator.userAgent.match(/iPhone/i) ||
-    navigator.userAgent.match(/iPad/i) ||
-    navigator.userAgent.match(/iPod/i) ||
-    navigator.userAgent.match(/BlackBerry/i) ||
-    navigator.userAgent.match(/Windows Phone/i) ?
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i) ?
         true : false
     if (isMobile === true) {
         return 'phone-normal'
@@ -60693,7 +60693,7 @@ ARjs.Profile.prototype.reset = function () {
     }
 
     this.contextParameters = {
-        cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
+        cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/',
         detectionMode: 'mono',
         labelingMode: "black_region"
     }
@@ -60974,7 +60974,7 @@ ARjs.Source.prototype._initSourceWebcam = function (onReady, onError) {
     // init default value
     onError = onError || function (error) {
         alert('Webcam Error\nName: ' + error.name + '\nMessage: ' + error.message)
-        var event = new CustomEvent('camera-error', {error: error});
+        var event = new CustomEvent('camera-error', { error: error });
         window.dispatchEvent(event);
     }
 
@@ -61026,7 +61026,7 @@ ARjs.Source.prototype._initSourceWebcam = function (onReady, onError) {
             // set the .src of the domElement
             domElement.srcObject = stream;
 
-            var event = new CustomEvent('camera-init', {stream: stream});
+            var event = new CustomEvent('camera-init', { stream: stream });
             window.dispatchEvent(event);
             // to start the video, when it is possible to start it only on userevent. like in android
             document.body.addEventListener('click', function () {
@@ -62817,52 +62817,52 @@ ARjs.MarkersAreaUtils.createDefaultMarkersControlsParameters = function (trackin
             type: 'pattern',
             patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-hiro.patt',
         },
-            {
-                type: 'pattern',
-                patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-kanji.patt',
-            },
-            {
-                type: 'pattern',
-                patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterA.patt',
-            },
-            {
-                type: 'pattern',
-                patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterB.patt',
-            },
-            {
-                type: 'pattern',
-                patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterC.patt',
-            },
-            {
-                type: 'pattern',
-                patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterF.patt',
-            },
+        {
+            type: 'pattern',
+            patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-kanji.patt',
+        },
+        {
+            type: 'pattern',
+            patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterA.patt',
+        },
+        {
+            type: 'pattern',
+            patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterB.patt',
+        },
+        {
+            type: 'pattern',
+            patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterC.patt',
+        },
+        {
+            type: 'pattern',
+            patternUrl: absoluteBaseURL + 'examples/marker-training/examples/pattern-files/pattern-letterF.patt',
+        },
         ]
     } else if (trackingBackend === 'aruco') {
         var markersControlsParameters = [{
             type: 'barcode',
             barcodeValue: 1001,
         },
-            {
-                type: 'barcode',
-                barcodeValue: 1002,
-            },
-            {
-                type: 'barcode',
-                barcodeValue: 1003,
-            },
-            {
-                type: 'barcode',
-                barcodeValue: 1004,
-            },
-            {
-                type: 'barcode',
-                barcodeValue: 1005,
-            },
-            {
-                type: 'barcode',
-                barcodeValue: 1006,
-            },
+        {
+            type: 'barcode',
+            barcodeValue: 1002,
+        },
+        {
+            type: 'barcode',
+            barcodeValue: 1003,
+        },
+        {
+            type: 'barcode',
+            barcodeValue: 1004,
+        },
+        {
+            type: 'barcode',
+            barcodeValue: 1005,
+        },
+        {
+            type: 'barcode',
+            barcodeValue: 1006,
+        },
         ]
     } else console.assert(false)
     return markersControlsParameters
